@@ -24,6 +24,7 @@
        <option value="rc-item">Related Cases</option>
        <option value="toc-item">Table of Contents</option>
        <option value="toa-item">Table of Authorities</option>
+       <option value="ui-guidance">Editing tools</option>       
        </optgroup>
      </select>
      </div>
@@ -75,7 +76,9 @@
           $(".toc_item").show();
        } else if(indVal === 'toa-item'){
           $(".toa_item").show();
-       }      
+       } else if(indVal === 'ui-guidance'){
+          $(".ui_guidance").show();
+       }
      }); // end change function
     });
     </script>       

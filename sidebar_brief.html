@@ -25,6 +25,7 @@
        <option value="arg-item">Argument</option>
        <option value="conc-item">Conclusion</option>
        <option value="sig-item">Signature Blocks</option>
+       <option value="ui-guidance">Editing tools</option>   
        </optgroup>
      </select>
      </div>
@@ -78,6 +79,8 @@
           $(".conc_item").show();
        } else if(briefVal === 'sig-item'){
           $(".sig_item").show();
+       } else if(briefVal === 'ui-guidance'){
+          $(".ui_guidance").show();
        }
       
      }); // end change function

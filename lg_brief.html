@@ -18,17 +18,31 @@
         appendix page number where it can
         be found. </p>
 </div>
-<div class="guidanceSnippet ob_item"><span class="guidanceTitle">OB
-        Tip</span>
-    <p>The information provided here is similar to the Statement of Related Cases requirement in the index (<a
+<div class="guidanceSnippet ob_item">
+    <span class="guidanceTitle">
+        OB Tip
+    </span>
+    <p>
+        The information provided here is similar to the Statement of Related Cases requirement in the index (<a
             href="https://www.supremecourt.gov/ctrules/2019RulesoftheCourt.pdf#page=15&amp;zoom=150,0,200"
             target="_blank">Rule 14.1(b)(iii)</a>), but you
-        must include both sections.</p>
+        must include both sections.
+    </p>
 </div>
 <div class="guidanceSnippet ob_item"><span class="guidanceTitle">OB
         Tip</span>
     <p>The best practice for drafting an OB section is to cite the appendix page number where the justices can find the
         order or opinion, and you cannot know the correct page reference unless you have completed your appendix.</p>
+</div>
+<div class="guidanceSnippet ob_item">
+    <span>
+        <input type="button" value="Insert Opinions Below" onclick="insertOpinionsBelow()" />
+    </span>
+    <script>
+        function insertOpinionsBelow() {
+            google.script.run.insertHeading("OPINIONS BELOW");
+        }
+    </script>    
 </div>
 <div class="guidanceSnippet js_item"><span class="guidanceTitle">Jurisdictional
         Statement
@@ -94,6 +108,16 @@
         different jurisdictional statutes.
     </p>
 </div>
+<div class="guidanceSnippet js_item">
+    <span>
+        <input type="button" value="Insert Jurisdiction" onclick="insertJurisdiction()" />
+    </span>
+    <script>
+        function insertJurisdiction() {
+            google.script.run.insertHeading("JURISDICTION");
+        }
+    </script>    
+</div>
 <div class="guidanceSnippet csp_item"><span class="guidanceTitle">Constitutional
         And Statutory
         Provisions Involved Rule</span>
@@ -126,6 +150,16 @@
     <p><a href="https://www.supremecourt.gov/ctrules/2019RulesoftheCourt.pdf#page=16&amp;zoom=150,0,500"
             target="_blank">Rule 14.1(g)</a></p>
 </div>
+<div class="guidanceSnippet csp_item">
+    <span>
+        <input type="button" value="Insert Provisions" onclick="insertProvisions()" />
+    </span>
+    <script>
+        function insertProvisions() {
+            google.script.run.insertHeading("CONSTITUTIONAL AND\nSTATUTORY PROVISIONS INVOLVED");
+        }
+    </script>    
+</div>
 <div class="guidanceSnippet soc_item"><span class="guidanceTitle">SOC
         Plain Language</span>
     <p>In this required section, you should provide a brief recitation of the relevant factual background of the case,
@@ -148,6 +182,16 @@
         that suggests your feelings about what has occurred in this case, but your real persuasion should wait until the
         next section. Brevity
         and lucidity are essential to effective advocacy in your SOC.</p>
+</div>
+<div class="guidanceSnippet soc_item">
+    <span>
+        <input type="button" value="Insert Statement of the Case" onclick="insertStatementOfTheCase()" />
+    </span>
+    <script>
+        function insertStatementOfTheCase() {
+            google.script.run.insertHeading("STATEMENT OF THE CASE");
+        }
+    </script>    
 </div>
 <div class="guidanceSnippet arg_item"><span class="guidanceTitle">Argument
         Rule</span>
@@ -180,6 +224,16 @@
     <p>A well-crafted Argument should describe how the error below has implications beyond your case. The Supreme Court
         is not likely to grant your petition only because the error below is unjust.</p>
 </div>
+<div class="guidanceSnippet arg_item">
+    <span>
+        <input type="button" value="Insert Argument" onclick="insertArgument()" />
+    </span>
+    <script>
+        function insertArgument() {
+            google.script.run.insertHeading("ARGUMENT");
+        }
+    </script>    
+</div>
 <div class="guidanceSnippet conc_item"><span class="guidanceTitle">Conclusion
         Note</span>
     <p>Conclusions are universally expected in legal writing, though for a petition they are not required by rule. We
@@ -192,6 +246,16 @@
     <p>The conclusion can be succinct like, “For the reasons stated herein, the petition should be granted,” or you can
         opt for a slightly more expressive paragraph that briefly summarizes the points made in the Argument.
     </p>
+</div>
+<div class="guidanceSnippet conc_item">
+    <span>
+        <input type="button" value="Insert Conclusion" onclick="insertConclusion()" />
+    </span>
+    <script>
+        function insertConclusion() {
+            google.script.run.insertHeading("CONCLUSION");
+        }
+    </script>    
 </div>
 <div class="guidanceSnippet sig_item"><span class="guidanceTitle">End
         Signature Rule</span>
@@ -219,4 +283,71 @@
     <p>You do not actually sign your booklet filing, so you should not include a signature line, just the printed filer
         information.
     </p>
+</div>
+<div class="guidanceSnippet ui_guidance">
+  <div class="guidanceTitle">
+    <p>Video tutorials</p>
+  </div>
+    <input type="button" value="Manually update index page numbers" onclick="runModalVideoPageIndex()" />
+    <script>
+        function runModalVideoPageIndex() {
+            google.script.run.runModal_PageIndex();
+        }        
+     </script>
+</div>
+<div class="guidanceSnippet ui_guidance">
+    <div class="guidanceTitle">
+        Set paragraph styles:
+    </div>
+    <span>
+        <input type="button" value="Normal" onclick="setStyleToNormal()" />
+    </span>
+    <span>
+        <input type="button" value="Heading 1" onclick="setStyleToHeading1()" />
+    </span>    
+    <span>
+        <input type="button" value="Heading 2" onclick="setStyleToHeading2()" />
+    </span>    
+    <span>
+        <input type="button" value="Heading 3" onclick="setStyleToHeading3()" />
+    </span>    
+    <span>
+        <input type="button" value="Heading 4" onclick="setStyleToHeading4()" />
+    </span>    
+    <span>
+        <input type="button" value="Heading 5" onclick="setStyleToHeading5()" />
+    </span>    
+    <span>
+        <input type="button" value="Heading 6" onclick="setStyleToHeading6()" />
+    </span>        
+    <div id="styleNote" style="display:none;">
+        Style set
+    </div>
+    <script>
+        function updateStyleNote(value) {
+            $('#pageSizeNote').text(value);
+            $('#pageSizeNote').show(500).delay(2500).hide(500);
+        }
+        function setStyleToNormal() {
+            google.script.run.withSuccessHandler(updateStyleNote).setParagraphStyle("normal");
+        }
+        function setStyleToHeading1() {
+            google.script.run.withSuccessHandler(updateStyleNote).setParagraphStyle("h1");
+        }        
+        function setStyleToHeading2() {
+            google.script.run.withSuccessHandler(updateStyleNote).setParagraphStyle("h2");
+        }
+        function setStyleToHeading3() {
+            google.script.run.withSuccessHandler(updateStyleNote).setParagraphStyle("h3");
+        }
+        function setStyleToHeading4() {
+            google.script.run.withSuccessHandler(updateStyleNote).setParagraphStyle("h4");
+        }        
+        function setStyleToHeading5() {
+            google.script.run.withSuccessHandler(updateStyleNote).setParagraphStyle("h5");
+        }        
+        function setStyleToHeading6() {
+            google.script.run.withSuccessHandler(updateStyleNote).setParagraphStyle("h6");
+        }        
+     </script>
 </div>
