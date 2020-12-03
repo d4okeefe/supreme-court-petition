@@ -288,66 +288,11 @@
   <div class="guidanceTitle">
     <p>Video tutorials</p>
   </div>
-    <input type="button" value="Manually update index page numbers" onclick="runModalVideoPageIndex()" />
-    <script>
-        function runModalVideoPageIndex() {
-            google.script.run.runModal_PageIndex();
-        }        
-     </script>
-</div>
-<div class="guidanceSnippet ui_guidance">
-    <div class="guidanceTitle">
-        Set paragraph styles:
-    </div>
-    <span>
-        <input type="button" value="Normal" onclick="setStyleToNormal()" />
-    </span>
-    <span>
-        <input type="button" value="Heading 1" onclick="setStyleToHeading1()" />
-    </span>    
-    <span>
-        <input type="button" value="Heading 2" onclick="setStyleToHeading2()" />
-    </span>    
-    <span>
-        <input type="button" value="Heading 3" onclick="setStyleToHeading3()" />
-    </span>    
-    <span>
-        <input type="button" value="Heading 4" onclick="setStyleToHeading4()" />
-    </span>    
-    <span>
-        <input type="button" value="Heading 5" onclick="setStyleToHeading5()" />
-    </span>    
-    <span>
-        <input type="button" value="Heading 6" onclick="setStyleToHeading6()" />
-    </span>        
-    <div id="styleNote" style="display:none;">
-        Style set
-    </div>
-    <script>
-        function updateStyleNote(value) {
-            $('#pageSizeNote').text(value);
-            $('#pageSizeNote').show(500).delay(2500).hide(500);
-        }
-        function setStyleToNormal() {
-            google.script.run.withSuccessHandler(updateStyleNote).setParagraphStyle("normal");
-        }
-        function setStyleToHeading1() {
-            google.script.run.withSuccessHandler(updateStyleNote).setParagraphStyle("h1");
-        }        
-        function setStyleToHeading2() {
-            google.script.run.withSuccessHandler(updateStyleNote).setParagraphStyle("h2");
-        }
-        function setStyleToHeading3() {
-            google.script.run.withSuccessHandler(updateStyleNote).setParagraphStyle("h3");
-        }
-        function setStyleToHeading4() {
-            google.script.run.withSuccessHandler(updateStyleNote).setParagraphStyle("h4");
-        }        
-        function setStyleToHeading5() {
-            google.script.run.withSuccessHandler(updateStyleNote).setParagraphStyle("h5");
-        }        
-        function setStyleToHeading6() {
-            google.script.run.withSuccessHandler(updateStyleNote).setParagraphStyle("h6");
-        }        
-     </script>
+  <ul>
+    <li>
+      <a href="https://youtu.be/t8yNMHzrIFw" target="_blank">
+        Manually update index page numbers
+      </a>
+    </li>
+  </ul>
 </div>

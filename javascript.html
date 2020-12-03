@@ -1,5 +1,125 @@
 <script>
+    $(document).ready(function () {
+
+        // on load settings
+        $(".sdbr").hide();
+        $(".sidebar_cv").show();
+        $(".guidanceSnippet").hide();
+        $(".cv_gen").show();
+
+        // change
+        $("#doc-sections").change(function () {
+            //console.log("selection changed!");
+            var docSection = document.getElementById("doc-sections");
+            var secVal = docSection.value;
+            //console.log(indVal);
+            var strUser = docSection.options[docSection.selectedIndex].text;
+            //console.log(strUser);
+
+            $(".sdbr").hide();
+            if (secVal === 'sidebar-cover') {
+                $(".sidebar_cv").show();
+                $(".cv_gen").show();
+            } else if (secVal === 'sidebar-index') {
+                $(".sidebar_in").show();
+                $(".in_gen").show();
+            } else if (secVal === 'sidebar-brief') {
+                $(".sidebar_br").show();
+                $(".br_gen").show();
+            }
+        }); // end change function
 
 
-  
+        // change
+        $("#cover-notes").change(function () {
+            //console.log("selection changed!");
+            var covNotes = document.getElementById("cover-notes");
+            var covVal = covNotes.value;
+            //console.log(covVal);
+            var strUser = covNotes.options[covNotes.selectedIndex].text;
+            //console.log(strUser);
+
+            $(".guidanceSnippet").hide();
+            if (covVal === 'general') {
+                $(".cv_gen").show();
+            } else if (covVal === 'docket-number') {
+                $(".cv_docket").show();
+            } else if (covVal === 'court-name-form') {
+                $(".cv_court_name_form").show();
+            } else if (covVal === 'case-caption') {
+                $(".cv_caption").show();
+            } else if (covVal === 'proceedings') {
+                $(".cv_proceedings").show();
+            } else if (covVal === 'doc-title') {
+                $(".cv_doctitle").show();
+            } else if (covVal === 'address-blocks') {
+                $(".cv_address").show();
+            } else if (covVal === 'ui-guidance') {
+                $(".ui_guidance").show();
+            }
+
+        }); // end change function
+
+
+        // change
+        $("#index-notes").change(function () {
+            //console.log("selection changed!");
+            var indexNotes = document.getElementById("index-notes");
+            var indVal = indexNotes.value;
+            //console.log(indVal);
+            var strUser = indexNotes.options[indexNotes.selectedIndex].text;
+            //console.log(strUser);
+
+            $(".guidanceSnippet").hide();
+            if (indVal === 'general') {
+                $(".in_gen").show();
+            } else if (indVal === 'qp-item') {
+                $(".qp_item").show();
+            } else if (indVal === 'lop-item') {
+                $(".lop_item").show();
+            } else if (indVal === 'cd-item') {
+                $(".cd_item").show();
+            } else if (indVal === 'rc-item') {
+                $(".rc_item").show();
+            } else if (indVal === 'toc-item') {
+                $(".toc_item").show();
+            } else if (indVal === 'toa-item') {
+                $(".toa_item").show();
+            } else if (indVal === 'ui-guidance') {
+                $(".ui_guidance").show();
+            }
+        }); // end change function
+
+        // change
+        $("#brief-notes").change(function () {
+            //console.log("selection changed!");
+            var briefNotes = document.getElementById("brief-notes");
+            var briefVal = briefNotes.value;
+            //console.log(briefVal);
+            var strUser = briefNotes.options[briefNotes.selectedIndex].text;
+            //console.log(strUser);
+
+            $(".guidanceSnippet").hide();
+            if (briefVal === 'general') {
+                $(".br_gen").show();
+            } else if (briefVal === 'ob-item') {
+                $(".ob_item").show();
+            } else if (briefVal === 'js-item') {
+                $(".js_item").show();
+            } else if (briefVal === 'csp-item') {
+                $(".csp_item").show();
+            } else if (briefVal === 'soc-item') {
+                $(".soc_item").show();
+            } else if (briefVal === 'arg-item') {
+                $(".arg_item").show();
+            } else if (briefVal === 'conc-item') {
+                $(".conc_item").show();
+            } else if (briefVal === 'sig-item') {
+                $(".sig_item").show();
+            } else if (briefVal === 'ui-guidance') {
+                $(".ui_guidance").show();
+            }
+
+        }); // end change function
+    });
 </script>
