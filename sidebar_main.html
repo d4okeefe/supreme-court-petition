@@ -14,6 +14,58 @@
                 Select a petition section
             </h3>        
             <div>
+                <select id="sections-all-in-one">
+                    <optgroup label="Choose a cover section">
+                        <option value="cv-general">General notes</option>
+                        <option value="docket-number">Docket number</option>
+                        <option value="case-caption">Case caption</option>
+                        <option value="proceedings">Proceedings</option>
+                        <option value="address-blocks">Address blocks</option>
+                    </optgroup>
+                    <optgroup label="Choose an index section">
+                        <option value="in-general">General notes</option>
+                        <option value="qp-item">Question Presented</option>
+                        <option value="lop-item">List of Parties</option>
+                        <option value="cd-item">Corporate Disclosure</option>
+                        <option value="rc-item">Related Cases</option>
+                        <option value="toc-item">Table of Contents</option>
+                        <option value="app-toc-item">Appendix Table of Contents</option>
+                        <option value="toa-item">Table of Authorities</option>
+                    </optgroup>
+                    <optgroup label="Choose a brief section">
+                        <option value="br-general">General notes</option>
+                        <option value="ob-item">Opinions Below</option>
+                        <option value="js-item">Jurisdiction</option>
+                        <option value="csp-item">Constitutional &amp; Statutory Provisions</option>
+                        <option value="soc-item">Statement of the Case</option>
+                        <option value="arg-item">Argument</option>
+                        <option value="conc-item">Conclusion</option>
+                        <option value="sig-item">Signature Blocks</option>
+                    </optgroup>
+                    <!--
+                    <optgroup label="Editing tools" >
+                        <option value="ui-guidance">Editing tools</option>                    
+                    </optgroup>
+                    -->
+                </select>                
+            </div>
+            <div class="block">
+                <?!= include('lg_cover'); ?>
+            </div>  
+            <div class="block">                
+                <?!= include('lg_index'); ?>
+            </div>  
+            <div class="block">
+                <?!= include('lg_brief'); ?>
+            </div>            
+        </div>
+    </div>
+        <!--
+        <div>
+            <h3>
+                Select a petition section
+            </h3>        
+            <div>
                 <select id="doc-sections">
                     <optgroup label="Choose a section">
                         <option value="sidebar-cover">Cover guidance</option>
@@ -42,7 +94,7 @@
                 </div>
             </div>
             <div class="block">
-                <?!= include('lg_cover'); ?>
+                INCLUDE LINE
             </div>
 
 
@@ -72,7 +124,7 @@
                 </div>
             </div>
             <div class="block">
-                <?!= include('lg_index'); ?>
+                INCLUDE LINE
             </div>
 
 
@@ -100,7 +152,7 @@
                 </div>
             </div>
             <div class="block">
-                <?!= include('lg_brief'); ?>
+                INCLUDE LINE
             </div>
 
 
@@ -108,6 +160,7 @@
 
         </div>
     </div>
+    -->
 
 
     <div class="sidebar bottom">

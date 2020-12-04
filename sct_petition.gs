@@ -6,9 +6,6 @@ function onOpen() {
   DocumentApp.getUi() 
       .createMenu('Supreme Court Guidance')
       .addItem('Show petition guidance', 'showMainNotes')
-//      .addItem('Show cover guidance', 'showCoverNotes')
-//      .addItem('Show index guidance', 'showIndexNotes')
-//      .addItem('Show brief guidance', 'showBriefNotes')
       .addToUi();
 }
 
@@ -17,29 +14,10 @@ function include(filename) {
       .getContent();
 }
 
-
 function showMainNotes(){
   var ui = HtmlService.createTemplateFromFile('sidebar_main').evaluate();
   ui.setTitle('Guidance for a Supreme Court Petition');
   DocumentApp.getUi().showSidebar(ui);  
-}
-
-function showCoverNotes(){
-  var ui = HtmlService.createTemplateFromFile('sidebar_cover').evaluate();
-  ui.setTitle('Guidance for a Supreme Court Cover');
-  DocumentApp.getUi().showSidebar(ui);  
-}
-
-function showIndexNotes(){
-  var ui = HtmlService.createTemplateFromFile('sidebar_index').evaluate();
-  ui.setTitle('Guidance for a Supreme Court Index');
-  DocumentApp.getUi().showSidebar(ui);
-}
-
-function showBriefNotes(){
-  var ui = HtmlService.createTemplateFromFile('sidebar_brief').evaluate();
-  ui.setTitle('Guidance for a Supreme Court Brief');
-  DocumentApp.getUi().showSidebar(ui);
 }
 
 
@@ -59,12 +37,6 @@ function insertHeading(heading){
     c.getElement().asParagraph().insertText(0, heading.toUpperCase());
     c.getElement().asParagraph().setHeading(DocumentApp.ParagraphHeading.HEADING1);
   }
-}
-
-
-
-function check_setParagraphStyle(){
-  setParagraphStyle("normal");
 }
 
 function setParagraphStyle(style){
