@@ -18,12 +18,15 @@
 
             $(".sdbr").hide();
             if (secVal === 'sidebar-cover') {
+                $(".ui_guidance").hide();
                 $(".sidebar_cv").show();
                 $(".cv_gen").show();
             } else if (secVal === 'sidebar-index') {
+                $(".ui_guidance").hide();
                 $(".sidebar_in").show();
                 $(".in_gen").show();
             } else if (secVal === 'sidebar-brief') {
+                $(".ui_guidance").hide();
                 $(".sidebar_br").show();
                 $(".br_gen").show();
             }
@@ -42,6 +45,7 @@
             $(".guidanceSnippet").hide();
             if (covVal === 'general') {
                 $(".cv_gen").show();
+                $(".ui_guidance").hide();
             } else if (covVal === 'docket-number') {
                 $(".cv_docket").show();
             } else if (covVal === 'court-name-form') {
@@ -73,6 +77,7 @@
             $(".guidanceSnippet").hide();
             if (indVal === 'general') {
                 $(".in_gen").show();
+                $(".ui_guidance").hide();
             } else if (indVal === 'qp-item') {
                 $(".qp_item").show();
             } else if (indVal === 'lop-item') {
@@ -102,6 +107,7 @@
             $(".guidanceSnippet").hide();
             if (briefVal === 'general') {
                 $(".br_gen").show();
+                $(".ui_guidance").hide();
             } else if (briefVal === 'ob-item') {
                 $(".ob_item").show();
             } else if (briefVal === 'js-item') {

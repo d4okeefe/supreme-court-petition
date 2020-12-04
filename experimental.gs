@@ -159,11 +159,16 @@ function correctTOCIndexPageNumbers(){
             var txt = edit.getText();
             for(var k = 0; k < index_headings.length; k++){
               if(k === 0){ edit.setBold(false); }
-              if(txt.includes(index_headings[k])){
-                var num = /\d+/.exec(txt);
-                var rn = romanize(num - 1);
-                edit.replaceText("\\d+", rn.toLowerCase());
-              }
+              Logger.log(txt);
+//              var heading_without_tab = /^.*\t/.exec(txt);
+//              var heading_without_tab = heading_without_tab.slice(0, -1);
+//              Logger.log(heading_without_tab);
+//              //if(txt.includes(index_headings[k])){
+//              if(heading_without_tab === index_headings[k]){
+//                var num = /\d+/.exec(txt);
+//                var rn = romanize(num - 1);
+//                edit.replaceText("\\d+", rn.toLowerCase());
+//              }
             }
           }
         }
