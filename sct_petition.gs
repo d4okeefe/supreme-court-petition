@@ -9,18 +9,47 @@ function onOpen() {
       .addToUi();
 }
 
+/*
+ * Enables main html page to import other html pages within Apps Script.
+ **/
 function include(filename) {
   return HtmlService.createHtmlOutputFromFile(filename)
       .getContent();
 }
 
+/*
+ * Opens LG-designed sidebar. Called from menu button.
+ **/
 function showMainNotes(){
   var ui = HtmlService.createTemplateFromFile('sidebar_main').evaluate();
   ui.setTitle('Guidance for a Supreme Court Petition');
   DocumentApp.getUi().showSidebar(ui);  
 }
 
-
+/*
+ * Sets page to letter size. Called from button on sidebar.
+ **/
+function setPageSizeToLetter(){
+  var d = DocumentApp.getActiveDocument();
+  var b = d.getBody();
+  if(b.getPageHeight() !== 792 && b.getPageWidth() !== 612){
+    b.setPageHeight(792);
+    b.setPageWidth(612);
+  }
+  return "Letter: 8-1/2\" x 11\"";
+}
+/*
+ * Sets page to booklet size. Called from button on sidebar.
+ **/
+function setPageSizeToBooklet(){
+  var d = DocumentApp.getActiveDocument();
+  var b = d.getBody();
+  if(b.getPageHeight() !== 666 && b.getPageWidth() !== 441){
+    b.setPageHeight(666);
+    b.setPageWidth(441);
+  }
+  return "Booklet: 6-1/8\" x 9-1/4\"";
+}
 
 /*
  * Inserts heading into brief. Called from buttons on sidebar.
@@ -39,6 +68,10 @@ function insertHeading(heading){
   }
 }
 
+/*
+ * Sets paragraph style of user selection.
+ * @param style Object holding paragraph style attributes.
+ */
 function setParagraphStyle(style){
   var d = DocumentApp.getActiveDocument();
   
@@ -92,161 +125,95 @@ function setParagraphStyle(style){
   return "style change";
 }
 
-
-
-
-
-
-
-
-
-function setPageSizeToLetter(){
-  var d = DocumentApp.getActiveDocument();
-  var b = d.getBody();
-  if(b.getPageHeight() !== 792 && b.getPageWidth() !== 612){
-    b.setPageHeight(792);
-    b.setPageWidth(612);
-  }
-  return "Letter: 8-1/2\" x 11\"";
-}
-
-function setPageSizeToBooklet(){
-  var d = DocumentApp.getActiveDocument();
-  var b = d.getBody();
-  if(b.getPageHeight() !== 666 && b.getPageWidth() !== 441){
-    b.setPageHeight(666);
-    b.setPageWidth(441);
-  }
-  return "Booklet: 6-1/8\" x 9-1/4\"";
-}
-
-function increaseSpaceAroundAllParagraphs2(){
-  var d = DocumentApp.getActiveDocument();
-  var r = getCoverRange(d);
-  
-  for(var i = 0; i < r.length; i++){
-    var e = r[i].getElement();
-    var t = e.getType();
-    Logger.log("orig_type: " + t);
-    
-    var count = 0;
-    while(t !== DocumentApp.ElementType.PARAGRAPH){
-      if(t === DocumentApp.ElementType.TABLE){break;}
-      if(!e){break}
-      
-      var new_e = e.getParent();
-      Logger.log("count: " + count++ + "; new_parent: " + new_e.getType());
-      e = new_e;
-      t = e.getType();
-    }
-    Logger.log("BREAK");
-    
-    if(t === DocumentApp.ElementType.PARAGRAPH){
-      //Logger.log("para found");
-      
-      var p = e.asParagraph();
-      var currSpaceBefore = p.getSpacingBefore();
-      var currSpaceAfter = p.getSpacingAfter();
-    
-      if(i === 0){
-        p.setSpacingBefore(0);
-        p.setSpacingAfter(currSpaceAfter + 2);      
-      }else if(i === r.length - 1){
-        p.setSpacingBefore(currSpaceBefore + 2);
-        p.setSpacingAfter(0);      
-      }else{
-        p.setSpacingBefore(currSpaceBefore + 2);
-        p.setSpacingAfter(currSpaceAfter + 2);      
-      }
-    }      
-  }
-  return "Text spacing expanded";
-}
-
-function decreaseSpaceAroundAllParagraphs2(){
-  var d = DocumentApp.getActiveDocument();
-  var r = getCoverRange(d);
-  
-  for(var i = 0; i < r.length; i++){
-    var e = r[i].getElement();
-    var t = e.getType();
-    Logger.log("orig_type: " + t);
-    
-    var count = 0;
-    while(t !== DocumentApp.ElementType.PARAGRAPH){
-      if(t === DocumentApp.ElementType.TABLE){break;}
-      if(!e){break}
-      
-      var new_e = e.getParent();
-      Logger.log("count: " + count++ + "; new_parent: " + new_e.getType());
-      e = new_e;
-      t = e.getType();
-    }
-    Logger.log("BREAK");
-    
-    if(t === DocumentApp.ElementType.PARAGRAPH){
-      //Logger.log("para found");
-      
-      var p = e.asParagraph();
-      var currSpaceBefore = p.getSpacingBefore();
-      var currSpaceAfter = p.getSpacingAfter();
-    
-      if(i === 0){
-        p.setSpacingBefore(0);
-        p.setSpacingAfter(currSpaceAfter - 2);      
-      }else if(i === r.length - 1){
-        p.setSpacingBefore(currSpaceBefore - 2);
-        p.setSpacingAfter(0);      
-      }else{
-        p.setSpacingBefore(currSpaceBefore - 2);
-        p.setSpacingAfter(currSpaceAfter - 2);      
-      }
-    }      
-  }
-  return "Text spacing reduced";
-}
-
+/*
+ * Increases spacing around all elements in 'cover' range.
+ * Depends of 'cover' range being preset in document.
+ */
 function increaseSpaceAroundAllParagraphs(){
-  var document = DocumentApp.getActiveDocument();
-  var paras = document.getBody().getParagraphs();
-  for(var i = 0; i < paras.length; i++){
+  var d = DocumentApp.getActiveDocument();
+  var r = getCoverRange(d);
+  
+  for(var i = 0; i < r.length; i++){
+    var e = r[i].getElement();
+    var t = e.getType();
+    Logger.log("orig_type: " + t);
     
-    var currSpaceBefore = paras[i].getSpacingBefore();
-    var currSpaceAfter = paras[i].getSpacingAfter();
-    
-    if(i === 0){
-      paras[i].setSpacingBefore(0);
-      paras[i].setSpacingAfter(currSpaceAfter + 2);      
-    }else if(i === paras.length - 1){
-      paras[i].setSpacingBefore(currSpaceBefore + 2);
-      paras[i].setSpacingAfter(0);      
-    }else{
-      paras[i].setSpacingBefore(currSpaceBefore + 2);
-      paras[i].setSpacingAfter(currSpaceAfter + 2);      
+    var count = 0;
+    while(t !== DocumentApp.ElementType.PARAGRAPH){
+      if(t === DocumentApp.ElementType.TABLE){break;}
+      if(!e){break}
+      
+      var new_e = e.getParent();
+      Logger.log("count: " + count++ + "; new_parent: " + new_e.getType());
+      e = new_e;
+      t = e.getType();
     }
+    Logger.log("BREAK");
+    
+    if(t === DocumentApp.ElementType.PARAGRAPH){
+      //Logger.log("para found");
+      
+      var p = e.asParagraph();
+      var currSpaceBefore = p.getSpacingBefore();
+      var currSpaceAfter = p.getSpacingAfter();
+    
+      if(i === 0){
+        p.setSpacingBefore(0);
+        p.setSpacingAfter(currSpaceAfter + 2);      
+      }else if(i === r.length - 1){
+        p.setSpacingBefore(currSpaceBefore + 2);
+        p.setSpacingAfter(0);      
+      }else{
+        p.setSpacingBefore(currSpaceBefore + 2);
+        p.setSpacingAfter(currSpaceAfter + 2);      
+      }
+    }      
   }
   return "Text spacing expanded";
 }
-
+/*
+ * Decreases spacing around all elements in 'cover' range.
+ * Depends of 'cover' range being preset in document.
+ */
 function decreaseSpaceAroundAllParagraphs(){
-  var document = DocumentApp.getActiveDocument();
-  var paras = document.getBody().getParagraphs();
-  for(var i = 0; i < paras.length; i++){
+  var d = DocumentApp.getActiveDocument();
+  var r = getCoverRange(d);
+  
+  for(var i = 0; i < r.length; i++){
+    var e = r[i].getElement();
+    var t = e.getType();
+    Logger.log("orig_type: " + t);
     
-    var currSpaceBefore = paras[i].getSpacingBefore();
-    var currSpaceAfter = paras[i].getSpacingAfter();
-    
-    if(i === 0){
-      paras[i].setSpacingBefore(0);
-      paras[i].setSpacingAfter(currSpaceAfter - 2);      
-    }else if(i === paras.length - 1){
-      paras[i].setSpacingBefore(currSpaceBefore - 2);
-      paras[i].setSpacingAfter(0);      
-    }else{
-      paras[i].setSpacingBefore(currSpaceBefore - 2);
-      paras[i].setSpacingAfter(currSpaceAfter - 2);      
+    var count = 0;
+    while(t !== DocumentApp.ElementType.PARAGRAPH){
+      if(t === DocumentApp.ElementType.TABLE){break;}
+      if(!e){break}
+      
+      var new_e = e.getParent();
+      Logger.log("count: " + count++ + "; new_parent: " + new_e.getType());
+      e = new_e;
+      t = e.getType();
     }
+    Logger.log("BREAK");
+    
+    if(t === DocumentApp.ElementType.PARAGRAPH){
+      //Logger.log("para found");
+      
+      var p = e.asParagraph();
+      var currSpaceBefore = p.getSpacingBefore();
+      var currSpaceAfter = p.getSpacingAfter();
+    
+      if(i === 0){
+        p.setSpacingBefore(0);
+        p.setSpacingAfter(currSpaceAfter - 2);      
+      }else if(i === r.length - 1){
+        p.setSpacingBefore(currSpaceBefore - 2);
+        p.setSpacingAfter(0);      
+      }else{
+        p.setSpacingBefore(currSpaceBefore - 2);
+        p.setSpacingAfter(currSpaceAfter - 2);      
+      }
+    }      
   }
   return "Text spacing reduced";
 }
-

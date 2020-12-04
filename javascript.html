@@ -16,6 +16,8 @@
             console.log(strUser);        
         
             $(".guidanceSnippet").hide();
+            
+            // cover section
             if (secVal === 'cv-general') {
                 $(".cv_gen").show();
                 $(".ui_guidance").hide();
@@ -29,9 +31,11 @@
                 $(".cv_doctitle").show();
             } else if (secVal === 'address-blocks') {
                 $(".cv_address").show();
-            } else if (secVal === 'ui-guidance') {
-                $(".ui_guidance").show();
-            } else if (secVal === 'in-general') {
+            } else if (secVal === 'cv-edit-tools') {
+                $(".cv_edit_tools").show();
+            }
+            // index section
+            else if (secVal === 'in-general') {
                 $(".in_gen").show();
                 $(".ui_guidance").hide();
             } else if (secVal === 'qp-item') {
@@ -50,7 +54,9 @@
                 $(".app_toc_item").show();
             } else if (secVal === 'ui-guidance') {
                 $(".ui_guidance").show();
-            }  else if (secVal === 'br-general') {
+            }
+            // brief section
+            else if (secVal === 'br-general') {
                 $(".br_gen").show();
                 $(".ui_guidance").hide();
             } else if (secVal === 'ob-item') {
