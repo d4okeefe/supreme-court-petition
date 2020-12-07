@@ -217,3 +217,36 @@ function decreaseSpaceAroundAllParagraphs(){
   }
   return "Text spacing reduced";
 }
+
+/**
+  * Converts font of all text to 12 pt, Century Schoolbook
+  * @return String message to ui sidebar
+  */
+function convertDocumentTextTo12ptCenturySchoolbook(){
+  var d = DocumentApp.getActiveDocument();
+  var b = d.getBody();
+  
+  normalStyle = {};
+  normalStyle[DocumentApp.Attribute.FONT_SIZE] = 12;
+  normalStyle[DocumentApp.Attribute.FONT_FAMILY] = "Century Schoolbook";
+
+  for (var i=0; i<b.getNumChildren(); i++) {
+    var c = b.getChild(i);
+    if (c.getType() ==  DocumentApp.ElementType.PARAGRAPH) {
+      var txt = c.asParagraph().getText();
+      if(!txt.includes("www.lookingglass.legal")){
+        // set normal para style
+        c.setAttributes(normalStyle);
+      }
+    } else if(c.getType() == DocumentApp.ElementType.TABLE){
+      var txt = c.asTable().getText();
+        // set normal para style
+        c.setAttributes(normalStyle);
+    } else if(c.getType() == DocumentApp.ElementType.TABLE_OF_CONTENTS){
+      var txt = c.asTableOfContents().getText();
+        // set normal para style
+        c.setAttributes(normalStyle);
+    }
+  }
+  return "Text set to 12 pt Century Schoolbook";  
+}

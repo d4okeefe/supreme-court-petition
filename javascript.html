@@ -3,7 +3,7 @@
 
         // on load settings
         $(".guidanceSnippet").hide();
-        $(".cv_gen").show();
+        $(".editing_tools_gen_info").show();
 
 
         // change sections-all-in-one
@@ -17,8 +17,19 @@
         
             $(".guidanceSnippet").hide();
             
+            
+            // editing section
+            if (secVal === 'editing-tools-gen') {
+                $(".editing_tools_gen_info").show();
+            } else if (secVal === 'editing-tools-sug1') {
+                $(".editing_tools_sub_info1").show();
+            } else if (secVal === 'editing-tools-sug2') {
+                $(".editing_tools_sub_info2").show();
+            }               
+
+            
             // cover section
-            if (secVal === 'cv-general') {
+            else if (secVal === 'cv-general') {
                 $(".cv_gen").show();
                 $(".ui_guidance").hide();
             } else if (secVal === 'docket-number') {
@@ -48,13 +59,13 @@
                 $(".rc_item").show();
             } else if (secVal === 'toc-item') {
                 $(".toc_item").show();
+//                google.script.run.navigateToSelectedHeading("TABLE OF CONTENTS");
             } else if (secVal === 'toa-item') {
                 $(".toa_item").show();
             } else if (secVal === 'app-toc-item') {
                 $(".app_toc_item").show();
-            } else if (secVal === 'ui-guidance') {
-                $(".ui_guidance").show();
             }
+
             // brief section
             else if (secVal === 'br-general') {
                 $(".br_gen").show();
@@ -73,10 +84,8 @@
                 $(".conc_item").show();
             } else if (secVal === 'sig-item') {
                 $(".sig_item").show();
-            } else if (secVal === 'ui-guidance') {
-                $(".ui_guidance").show();
             }
-        
+            
         });
     });
 

@@ -1,3 +1,62 @@
+function insertSignatureTable(){
+
+}
+
+function normalStyle(){
+  var style = {};
+  style[DocumentApp.Attribute.FONT_SIZE] = 12;
+  style[DocumentApp.Attribute.FONT_FAMILY] = "Century Schoolbook";
+  //style[DocumentApp.Attribute.SPACING_BEFORE] = 0;
+  //style[DocumentApp.Attribute.SPACING_AFTER] = 6;
+  //style[DocumentApp.Attribute.LINE_SPACING] = 1.3;
+  return style;
+}
+
+function testNav(){
+  navigateToSelectedHeading("TABLE OF CONTENTS");
+}
+
+/**
+  * Navigate to heading based on click.
+  */
+function navigateToSelectedHeading(heading){
+  var h = captureLinksFromTOC();
+  for(var i = 0; i < h.length; i++){
+    if(h[i].txt === heading){
+      Logger.log(h[i].lnk);
+    }
+  }
+}
+
+/**
+  * Capture links from headings
+  */
+function captureLinksFromTOC(){
+  var d = DocumentApp.getActiveDocument();
+  var id = d.getUrl();
+  var b = d.getBody();
+  
+  var toc = null;
+  var count = 0;
+  var h = [];
+  
+  while(toc = b.findElement(DocumentApp.ElementType.TABLE_OF_CONTENTS, toc)){
+    var e = toc.getElement().asTableOfContents();
+    var n = e.getNumChildren();
+    for(var i = 0; i < n; i++){
+      var c = e.getChild(i);
+      h.push({
+        txt: /.*(?=\t)/.exec(c.getText())[0],
+        lnk: id + c.asText().getLinkUrl(2)
+      });
+    }
+  }
+//  for(var j = 0; j < h.length; j++){
+//    Logger.log(h[j].txt + ": " + h[j].lnk);
+//  }  
+  return h;
+}
+
 /*
  * Set index page numbers in Petition. This function works, but
  * often sets the page numbers in incorrect order. When it captures
@@ -88,7 +147,9 @@ function setIndexNumbersInHeaders(){
   ];
   
   for (var i = 0; i < headings.length; i++) {
+    //Logger.log(h);
     if(h === headings[i]){
+      //Logger.log(true);
       return true;
     }
   }
@@ -117,9 +178,9 @@ function captureHeadingsFromIndex(){
       }
     }
   }
-//  for(var itm in toc){
-//    Logger.log(toc[itm]);
-//  }
+  for(var j = 0; j < toc.length; j++){
+    //Logger.log(toc[j]);
+  }
   return toc;
 }
 
@@ -136,11 +197,18 @@ function romanize(num) {
   return roman;
 }
 
+function printArray(a){
+  for (var i = 0; i < a.length; i++) {
+    Logger.log(a[i]);
+  }
+}
+
 function correctTOCIndexPageNumbers(){
   var d = DocumentApp.getActiveDocument();
   var r = d.getNamedRanges('index')[0].getRange();
   
   var index_headings = captureHeadingsFromIndex();
+  //printArray(index_headings);
   
   if(r){
     var elements = r.getRangeElements();
@@ -156,24 +224,28 @@ function correctTOCIndexPageNumbers(){
           var toc_itm_type = toc_itm.getType();
           if(toc_itm_type === DocumentApp.ElementType.PARAGRAPH){
             var edit = toc_itm.editAsText();
-            var txt = edit.getText();
-            for(var k = 0; k < index_headings.length; k++){
-              if(k === 0){ edit.setBold(false); }
-              Logger.log(txt);
-//              var heading_without_tab = /^.*\t/.exec(txt);
-//              var heading_without_tab = heading_without_tab.slice(0, -1);
-//              Logger.log(heading_without_tab);
-//              //if(txt.includes(index_headings[k])){
-//              if(heading_without_tab === index_headings[k]){
-//                var num = /\d+/.exec(txt);
-//                var rn = romanize(num - 1);
-//                edit.replaceText("\\d+", rn.toLowerCase());
-//              }
+            var toc_txt = edit.getText();
+            var rx = /^(.*)\t(\d+)/;
+            var toc_itm = toc_txt.match(rx);
+            if(toc_itm){
+//              Logger.log(toc_itm[1]);
+//              Logger.log(toc_itm[2]);
+              
+              for(var k = 0; k < index_headings.length; k++){
+                
+                if(toc_itm[1] === index_headings[k]){
+                  edit.setBold(false);
+                  var rn = romanize(toc_itm[2] - 1);
+                  edit.replaceText("\\d+", rn.toLowerCase());
+                }
+              }
+              
+            } else {
+              // skip -- toc item bad structure
             }
-          }
-        }
-      }
-    }
-  }
-}
-
+          } // end if Paragraph
+        } // end for toc_item
+      } // end if ele_type TABLE_OF_CONTENTS
+    } // end for elements
+  } // end if r
+} // end function
