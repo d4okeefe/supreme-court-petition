@@ -67,17 +67,24 @@
         numbers will not auto-update.
     </p>
     <p>
-        We've provided a method for updating the index page numbers below. 
+        We've provided a button for updating the index page numbers. See below. 
         Before running, make sure that the Table of Contents is updated. (Update 
-        it by right-click anywhere in the TOC, then clicking "Update Table 
+        by right-clicking anywhere in the TOC, then clicking "Update Table 
         of Contents".)
     </p>
     <p>
         <input type="button" value="Update TOC page numbers" onclick="correctTOCPgNums()" />
     </p>
+    <div id="updateTocPgNumsNote" style="display:none;">
+        Page numbers updated
+    </div>    
     <script>
+        function updateTocPgNums(value) {
+            $('#updateTocPgNumsNote').text(value);
+            $('#updateTocPgNumsNote').show(500).delay(2500).hide(500);
+        }    
         function correctTOCPgNums() {
-            google.script.run.correctTOCIndexPageNumbers();
+            google.script.run.withSuccessHandler(updateTocPgNums)correctTOCIndexPageNumbers();
         }
     </script>
 </div>

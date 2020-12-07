@@ -12,57 +12,12 @@ function normalStyle(){
   return style;
 }
 
-function testNav(){
-  navigateToSelectedHeading("TABLE OF CONTENTS");
-}
-
 /**
-  * Navigate to heading based on click.
+  * Set index page numbers in Petition. This function works, but
+  * often sets the page numbers in incorrect order. When it captures
+  * headers, the program doesn't know the order the headers appear
+  * in the document.
   */
-function navigateToSelectedHeading(heading){
-  var h = captureLinksFromTOC();
-  for(var i = 0; i < h.length; i++){
-    if(h[i].txt === heading){
-      Logger.log(h[i].lnk);
-    }
-  }
-}
-
-/**
-  * Capture links from headings
-  */
-function captureLinksFromTOC(){
-  var d = DocumentApp.getActiveDocument();
-  var id = d.getUrl();
-  var b = d.getBody();
-  
-  var toc = null;
-  var count = 0;
-  var h = [];
-  
-  while(toc = b.findElement(DocumentApp.ElementType.TABLE_OF_CONTENTS, toc)){
-    var e = toc.getElement().asTableOfContents();
-    var n = e.getNumChildren();
-    for(var i = 0; i < n; i++){
-      var c = e.getChild(i);
-      h.push({
-        txt: /.*(?=\t)/.exec(c.getText())[0],
-        lnk: id + c.asText().getLinkUrl(2)
-      });
-    }
-  }
-//  for(var j = 0; j < h.length; j++){
-//    Logger.log(h[j].txt + ": " + h[j].lnk);
-//  }  
-  return h;
-}
-
-/*
- * Set index page numbers in Petition. This function works, but
- * often sets the page numbers in incorrect order. When it captures
- * headers, the program doesn't know the order the headers appear
- * in the document
- */
 function setIndexNumbersInHeaders(){
   var d = DocumentApp.getActiveDocument();
   var h = d.getHeader();
@@ -136,6 +91,12 @@ function setIndexNumbersInHeaders(){
  * Step 3: Create dictionary of numbers, using this to
  * replace the numbers in the TOC.
  */
+ 
+ /**
+  * Converts arabic numbers to roman numerals.
+  * @param h ParagraphHeading value
+  * @return Boolean
+  */
  function isDocHeading(h){
   var headings = [
     DocumentApp.ParagraphHeading.HEADING1,
@@ -158,7 +119,7 @@ function setIndexNumbersInHeaders(){
  
 /**
   * Capture headings from 'index', which is a NamedRange
-  *
+  * @return String array of headings in 'index' NamedRange
   */
 function captureHeadingsFromIndex(){
   var d = DocumentApp.getActiveDocument();
@@ -184,6 +145,11 @@ function captureHeadingsFromIndex(){
   return toc;
 }
 
+/**
+  * Converts arabic numbers to roman numerals.
+  * @param num An arabic number
+  * @return String representation of roman numeral, in upper case.
+  */
 function romanize(num) {
   var lookup = {M:1000,CM:900,D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV:4,I:1},
       roman = '',
@@ -197,12 +163,19 @@ function romanize(num) {
   return roman;
 }
 
+/**
+  * Simple function to print array.
+  */
 function printArray(a){
   for (var i = 0; i < a.length; i++) {
     Logger.log(a[i]);
   }
 }
 
+/**
+  * Corrects TOC entry page numbers.
+  * @return String ui update
+  */
 function correctTOCIndexPageNumbers(){
   var d = DocumentApp.getActiveDocument();
   var r = d.getNamedRanges('index')[0].getRange();
@@ -248,4 +221,5 @@ function correctTOCIndexPageNumbers(){
       } // end if ele_type TABLE_OF_CONTENTS
     } // end for elements
   } // end if r
+  return "Page numbers updated. See Table of Contents."
 } // end function
