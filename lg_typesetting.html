@@ -23,16 +23,16 @@
         You can unwittingly introduce fonts and font sizes that are not rule compliant.
     </p>
     <p>
-        <i>Tip #1:</i> When pasting text, try using the keyboard combination Control-Shift-v. 
+        <b><i>Tip #1:</i></b> When pasting text, try using the keyboard combination Control-Shift-v. 
         The pasted text will match the formatting of the Google Doc paragraph.
     </p>
-    <p style="">
-        <i>Tip #2:</i> The button below will ensure text is in 12 point Century font.
+    <p>
+        <b><i>Tip #2:</i></b> The button below will ensure text is in 12 point Century font.
     </p>
     <span>
-        <input type="button" style="margin-left:12px;" value="12 pt Century font" onclick="setTextTo12ptCentury()" />
+        <input type="button" value="12 pt Century font" onclick="setTextTo12ptCentury()" />
     </span>
-    <div id="setTextNote" style="display:none; margin-left:12px;">
+    <div id="setTextNote" class="progress-popup">
         Text set to 12 pt Century Schoolbook
     </div>    
     <script>
@@ -75,7 +75,7 @@
     <p>
         <input type="button" value="Update TOC page numbers" onclick="correctTOCPgNums()" />
     </p>
-    <div id="updateTocPgNumsNote" style="display:none;">
+    <div id="updateTocPgNumsNote" class="progress-popup">
         Page numbers updated
     </div>    
     <script>
@@ -98,13 +98,11 @@
         pages, which adheres to traditional Supreme Court rules. 
         <b>Letter</b> changes the layout to <b>8&nbsp;½ x 11 inch</b> pages.
     </p>
-    <span>
-        <input type="button" value="Letter" onclick="setPageToLetterSize()" />
-    </span>
-    <span>
-        <input type="button" value="Booklet" onclick="setPageToBookletSize()" />
-    </span>
-    <div id="pageSizeNote" style="display:none;">
+    <p>
+        <input class="small-btn" type="button" value="Letter" onclick="setPageToLetterSize()" />
+        <input class="small-btn" type="button" value="Booklet" onclick="setPageToBookletSize()" />
+    </p>
+    <div id="pageSizeNote" class="progress-popup">
         Page size changed
     </div>
     <script>
@@ -122,7 +120,7 @@
         }
     </script>
 </div>
-<div class="guidanceSnippet editing_tools_sub_info2" style="margin-top:30px;">
+<div class="guidanceSnippet editing_tools_sub_info2 heading_extra_space">
     <span class="guidanceTitle">
         Expand / shrink height of cover
     </span>
@@ -131,12 +129,10 @@
         add or remove spacing before and after each cover element. Note that the cover must fit on 
         a single page.
     </p>    
-    <span>
-        <input type="button" value="Increase spacing" onclick="increaseSpacing()" />
-    </span>
-    <span>
-        <input type="button" value="Decrease spacing" onclick="decreaseSpacing()" />
-    </span>
+    <p>
+        <input class="small-btn" type="button" value="Expand height" onclick="increaseSpacing()" />
+        <input class="small-btn" type="button" value="Shrink height" onclick="decreaseSpacing()" />
+    </p>
     <div id="coverExpandNote" style="display:none;">
         Spacing changed
     </div>
