@@ -197,6 +197,7 @@ function correctTOCIndexPageNumbers(){
           var toc_itm_type = toc_itm.getType();
           if(toc_itm_type === DocumentApp.ElementType.PARAGRAPH){
             var edit = toc_itm.editAsText();
+            edit.setBold(false);
             var toc_txt = edit.getText();
             var rx = /^(.*)\t(\d+)/;
             var toc_itm = toc_txt.match(rx);
