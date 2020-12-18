@@ -1,103 +1,121 @@
 <script>
-    $(document).ready(function () {
+	$(document).ready(function () {
+    // on load settings
+    $(".guidanceSnippet").hide();
+    $(".editing_tools_gen_info").show();
+    $(".top-heading").text("The document");
 
-        // on load settings
-        $(".guidanceSnippet").hide();
-        $(".editing_tools_gen_info").show();
-        $(".top-heading").text("Introducing the document");
-        
-
-
-        // change sections-all-in-one
-        $("#sections-all-in-one").change(function () {
-            //console.log("selection changed!");
-            var docSection = document.getElementById("sections-all-in-one");
-            var secVal = docSection.value;
-            var strUser = docSection.options[docSection.selectedIndex].text;
-            
-            var $docSection = $("#sections-all-in-one option:selected").attr('class');
-            console.log('$docSection: ' + $docSection);
-            
-            // UPDATE TOP HEADING
-            if($docSection === "sec-docinfo"){
-              $(".top-heading").text("Introducing the document");
-            }else if($docSection === "sec-cover"){
-              $(".top-heading").text("Cover guidance");
-            }else if($docSection === "sec-index"){
-              $(".top-heading").text("Index guidance");
-            }else if($docSection === "sec-brief"){
-              $(".top-heading").text("Brief guidance");
-            }
-            
-            
-            
-            // UPDATE GUIDANCE NOTES
-            $(".guidanceSnippet").hide();
-            // editing section
-            if (secVal === 'editing-tools-gen') {
-                $(".editing_tools_gen_info").show();
-            } else if (secVal === 'editing-tools-sug1') {
-                $(".editing_tools_sub_info1").show();
-            } else if (secVal === 'editing-tools-sug2') {
-                $(".editing_tools_sub_info2").show();
-            }               
-            // cover section
-            else if (secVal === 'cv-general') {
-                $(".cv_gen").show();
-                $(".ui_guidance").hide();
-            } else if (secVal === 'docket-number') {
-                $(".cv_docket").show();
-            } else if (secVal === 'case-caption') {
-                $(".cv_caption").show();
-            } else if (secVal === 'proceedings') {
-                $(".cv_proceedings").show();
-            } else if (secVal === 'doc-title') {
-                $(".cv_doctitle").show();
-            } else if (secVal === 'address-blocks') {
-                $(".cv_address").show();
-            } else if (secVal === 'cv-edit-tools') {
-                $(".cv_edit_tools").show();
-            }
-            // index section
-            else if (secVal === 'in-general') {
-                $(".in_gen").show();
-                $(".ui_guidance").hide();
-            } else if (secVal === 'qp-item') {
-                $(".qp_item").show();
-            } else if (secVal === 'lop-item') {
-                $(".lop_item").show();
-            } else if (secVal === 'cd-item') {
-                $(".cd_item").show();
-            } else if (secVal === 'rc-item') {
-                $(".rc_item").show();
-            } else if (secVal === 'toc-item') {
-                $(".toc_item").show();
-            } else if (secVal === 'toa-item') {
-                $(".toa_item").show();
-            } else if (secVal === 'app-toc-item') {
-                $(".app_toc_item").show();
-            }
-            // brief section
-            else if (secVal === 'br-general') {
-                $(".br_gen").show();
-                $(".ui_guidance").hide();
-            } else if (secVal === 'ob-item') {
-                $(".ob_item").show();
-            } else if (secVal === 'js-item') {
-                $(".js_item").show();
-            } else if (secVal === 'csp-item') {
-                $(".csp_item").show();
-            } else if (secVal === 'soc-item') {
-                $(".soc_item").show();
-            } else if (secVal === 'arg-item') {
-                $(".arg_item").show();
-            } else if (secVal === 'conc-item') {
-                $(".conc_item").show();
-            } else if (secVal === 'sig-item') {
-                $(".sig_item").show();
-            }
-            
-        });
+    // NEXT BUTTON
+    $('#next_button').click(function() {
+      var s = document.getElementById("sections-all-in-one");
+      var curr_s = s.value;
+      console.log(curr_s);
+      for (i = 0; i < s.length; i++){
+        var s_itm = s.options[i].value;
+        if(curr_s === s_itm){
+          if(i === s.length - 1){
+            s.selectedIndex = 0;
+            s.dispatchEvent(new Event('change'));   
+            break;       
+          }                  
+          s.selectedIndex = i + 1;
+          s.dispatchEvent(new Event('change'));
+          break;
+        }
+      }
     });
 
+
+
+    // change sections-all-in-one
+    $("#sections-all-in-one").change(function () {
+      //console.log("selection changed!");
+      var docSection = document.getElementById("sections-all-in-one");
+      var secVal = docSection.value;
+      var strUser = docSection.options[docSection.selectedIndex].text;
+
+      var $docSection = $("#sections-all-in-one option:selected").attr('class');
+      console.log('$docSection: ' + $docSection);
+
+      // UPDATE TOP HEADING
+      if ($docSection === "sec-docinfo") {
+        $(".top-heading").text("The document");
+      } else if ($docSection === "sec-cover") {
+        $(".top-heading").text("Cover guidance");
+      } else if ($docSection === "sec-index") {
+        $(".top-heading").text("Index guidance");
+      } else if ($docSection === "sec-brief") {
+        $(".top-heading").text("Brief guidance");
+      }
+
+
+
+      // UPDATE GUIDANCE NOTES
+      $(".guidanceSnippet").hide();
+      // editing section
+      if (secVal === 'editing-tools-gen') {
+        $(".editing_tools_gen_info").show();
+      } else if (secVal === 'editing-tools-sug1') {
+        $(".editing_tools_sub_info1").show();
+      } else if (secVal === 'editing-tools-sug2') {
+        $(".editing_tools_sub_info2").show();
+      }
+      // cover section
+      else if (secVal === 'cv-general') {
+        $(".cv_gen").show();
+        $(".ui_guidance").hide();
+      } else if (secVal === 'docket-number') {
+        $(".cv_docket").show();
+      } else if (secVal === 'case-caption') {
+        $(".cv_caption").show();
+      } else if (secVal === 'proceedings') {
+        $(".cv_proceedings").show();
+      } else if (secVal === 'doc-title') {
+        $(".cv_doctitle").show();
+      } else if (secVal === 'address-blocks') {
+        $(".cv_address").show();
+      } else if (secVal === 'cv-edit-tools') {
+        $(".cv_edit_tools").show();
+      }
+      // index section
+      else if (secVal === 'in-general') {
+        $(".in_gen").show();
+        $(".ui_guidance").hide();
+      } else if (secVal === 'qp-item') {
+        $(".qp_item").show();
+      } else if (secVal === 'lop-item') {
+        $(".lop_item").show();
+      } else if (secVal === 'cd-item') {
+        $(".cd_item").show();
+      } else if (secVal === 'rc-item') {
+        $(".rc_item").show();
+      } else if (secVal === 'toc-item') {
+        $(".toc_item").show();
+      } else if (secVal === 'toa-item') {
+        $(".toa_item").show();
+      } else if (secVal === 'app-toc-item') {
+        $(".app_toc_item").show();
+      }
+      // brief section
+      else if (secVal === 'br-general') {
+        $(".br_gen").show();
+        $(".ui_guidance").hide();
+      } else if (secVal === 'ob-item') {
+        $(".ob_item").show();
+      } else if (secVal === 'js-item') {
+        $(".js_item").show();
+      } else if (secVal === 'csp-item') {
+        $(".csp_item").show();
+      } else if (secVal === 'soc-item') {
+        $(".soc_item").show();
+      } else if (secVal === 'arg-item') {
+        $(".arg_item").show();
+      } else if (secVal === 'conc-item') {
+        $(".conc_item").show();
+      } else if (secVal === 'sig-item') {
+        $(".sig_item").show();
+      }
+
+    });
+  });
 </script>

@@ -1,19 +1,24 @@
-/*
+/**
  * Gets 'cover' NamedRange in document.
  * @return Range of 'cover' in document
  */
- function getCoverRange(d){
+function getCoverRange(d) {
   var rngs = d.getNamedRanges();
-  for(var i = 0; i < rngs.length; i++){
-    if(rngs[i].getName() === "cover"){
-      return rngs[i].getRange().getRangeElements();
+  for (var i = 0; i < rngs.length; i++) {
+    try {
+      if (rngs[i].getName() === "cover") {
+        return rngs[i].getRange().getRangeElements();
+      }
+    } catch (error) {
+      Logger.log(error);
+      return null;
     }
   }
 }
-/*
+/**
  * Sets 'cover' NamedRange in template document.
  */
-function createCoverNamedRange(){
+function createCoverNamedRange() {
   var d = DocumentApp.getActiveDocument();
   var rangeBuilder = d.newRange();
   var body = d.getBody();
@@ -22,10 +27,10 @@ function createCoverNamedRange(){
   rangeBuilder.addElementsBetween(startElem, endElem);
   d.addNamedRange("cover", rangeBuilder);
 }
-/*
+/**
  * Sets 'index' NamedRange in template document.
  */
-function createIndexNamedRange(){
+function createIndexNamedRange() {
   var d = DocumentApp.getActiveDocument();
   var rangeBuilder = d.newRange();
   var body = d.getBody();
@@ -34,28 +39,29 @@ function createIndexNamedRange(){
   rangeBuilder.addElementsBetween(startElem, endElem);
   d.addNamedRange("index", rangeBuilder);
 }
-/*
+
+/**
  * Removes NamedRange in template document.
  */
-function deleteNamedRange(){
+function deleteNamedRange() {
   var d = DocumentApp.getActiveDocument();
   var r = d.getNamedRanges('cover');
   r[0].remove();
   Logger.log(r);
 }
-/*
+/**
  * Selects NamedRange in template document.
  */
-function selectNamedRange(){
+function selectNamedRange() {
   var d = DocumentApp.getActiveDocument();
   var rng = d.getNamedRanges();
-  for(var i = 0; i < rng.length; i++){
+  for (var i = 0; i < rng.length; i++) {
     Logger.log(rng[i].getId());
     Logger.log(rng[i].getName());
-    if(rng[i].getName() === 'index'){
-//      for(var j = 0; j < rng[i].length; j++){
-//        var e = rng[i].getRange().getRangeElements()[j].getElement();
-//      }
+    if (rng[i].getName() === 'index') {
+      //      for(var j = 0; j < rng[i].length; j++){
+      //        var e = rng[i].getRange().getRangeElements()[j].getElement();
+      //      }
       d.setSelection(rng[i].getRange());
     }
   }

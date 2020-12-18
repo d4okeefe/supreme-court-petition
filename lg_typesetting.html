@@ -1,154 +1,191 @@
 <div class="guidanceSnippet editing_tools_gen_info">
-    <span class="guidanceTitle">The layout</span>
-    <p>
-        The page layout here follows Supreme Court rules that specify 
-        briefs be printed on  <b>6&nbsp;⅛ x 9&nbsp;¼ inch</b> pages with 
-        <b>¾ inch</b> margins.
-    </p>
+	<span class="guidanceTitle">The layout</span>
+	<p>
+		The page layout here follows Supreme Court rules that specify
+		briefs be printed on <b>6&nbsp;⅛ x 9&nbsp;¼ inch</b> pages with
+		<b>¾ inch</b> margins.
+	</p>
 </div>
 <div class="guidanceSnippet editing_tools_gen_info">
-    <span class="guidanceTitle">The design</span>
-    <p>
-        This template has three parts: a cover, an index, and a brief. 
-        The parts are separated by section breaks, which you can see by 
-        clicking on the menu <b>View > Show section breaks</b>. The 
-        breaks will appear as dotted blue lines after the text on a page.
-    </p>
+	<span class="guidanceTitle">The design</span>
+	<p>
+		This template has three parts: a cover, an index, and a brief.
+		The parts are separated by section breaks, which you can see by
+		clicking on the menu <b>View > Show section breaks</b>. The
+		breaks will appear as dotted blue lines after the text on a page.
+	</p>
 </div>
 <div class="guidanceSnippet editing_tools_gen_info">
-    <span class="guidanceTitle">Text formatting</span>
-    <p>
-        Text in Supreme Court briefs is set in a <b>12&nbsp;point Century font</b> with 
-        14&nbsp;point line spacing. Take care when pasting text from another source. 
-        You can unwittingly introduce fonts and font sizes that are not rule compliant.
-    </p>
-    <p>
-        <b><i>Tip #1:</i></b> When pasting text, try using the keyboard combination Control-Shift-v. 
-        The pasted text will match the formatting of the Google Doc paragraph.
-    </p>
-    <p>
-        <b><i>Tip #2:</i></b> The button below will ensure text is in 12 point Century font.
-    </p>
-    <span>
-        <input type="button" class="action" value="12 pt Century font" onclick="setTextTo12ptCentury()" />
-    </span>
-    <div id="setTextNote" class="progress-popup">
-        Text set to 12 pt Century Schoolbook
-    </div>    
-    <script>
-      function updateTextNote(value){
-            $('#setTextNote').text(value);
-            $('#setTextNote').show(500).delay(2500).hide(500);        
-      }
-      function setTextTo12ptCentury(){
-        google.script.run.withSuccessHandler(updateTextNote).convertDocumentTextTo12ptCenturySchoolbook();
-      }
-    </script>
-</div>    
-<div class="guidanceSnippet editing_tools_sub_info1">
-    <span class="guidanceTitle">Page numbers</span>
-    <p>
-        The page numbers in the brief section are automated. However, the page 
-        numbers in the index must be manually updated.
-    </p>
-    <p>    
-        By rule, index page numbers are numbered with Roman numerals (i, ii, iii). 
-        Google Docs only allows page numbering in arabic numberals (1, 2, 3), so 
-        you must manually type the index Roman numeral page numbers in the Google 
-        Doc header. We made <a href="https://youtu.be/t8yNMHzrIFw" target="_blank">a 
-        short video</a> showing how to do this.
-    </p>
+	<span class="guidanceTitle">Text formatting</span>
+	<p>
+		Text in Supreme Court briefs is set in a <b>12&nbsp;point Century font</b> with
+		14&nbsp;point line spacing. Take care when pasting text from another source.
+		You can unwittingly introduce fonts and font sizes that are not rule compliant.
+	</p>
+	<p>
+		<b><i>Tip #1:</i></b> When pasting text, try using the keyboard combination Control-Shift-v.
+		The pasted text will match the formatting of the Google Doc paragraph.
+	</p>
+	<p>
+		<b><i>Tip #2:</i></b> The button below will ensure text is in 12 point Century font.
+	</p>
+	<span>
+    <input id="century_12pt"
+           type="button"
+           class="action"
+           value="12 pt Century font"
+           onclick="setTextTo12ptCentury()" />
+  </span>
+	<div id="setTextNote" class="progress-popup">
+		Text set to 12 pt Century Schoolbook
+	</div>
+	<script>
+		function updateTextNote(value) {
+      document.getElementById("century_12pt").disabled = false;
+      $('#setTextNote').text(value);
+      $('#setTextNote').show(500).delay(2500).hide(500);
+    }
+
+    function setTextTo12ptCentury() {
+      document.getElementById("century_12pt").disabled = true;
+      google.script.run.withSuccessHandler(updateTextNote).convertDocumentTextTo12ptCenturySchoolbook();
+    }
+	</script>
 </div>
 <div class="guidanceSnippet editing_tools_sub_info1">
-    <span class="guidanceTitle">Table of contents</span>
-    <p>
-        In this template, we include a Google Docs built-in Table of Contents, 
-        which you can view  on page "v" of the index. However, the index page 
-        numbers will not auto-update.
-    </p>
-    <p>
-        We've provided a button for updating the index page numbers. See below. 
-        Before running, make sure that the Table of Contents is updated. (Update 
-        by right-clicking anywhere in the TOC, then clicking "Update Table 
-        of Contents".)
-    </p>
-    <p>
-        <input type="button" value="Update TOC page numbers" onclick="correctTOCPgNums()" />
-    </p>
-    <div id="updateTocPgNumsNote" class="progress-popup">
-        Page numbers updated
-    </div>    
-    <script>
-        function updateTocPgNums(value) {
-            $('#updateTocPgNumsNote').text(value);
-            $('#updateTocPgNumsNote').show(500).delay(2500).hide(500);
-        }    
-        function correctTOCPgNums() {
-            google.script.run.withSuccessHandler(updateTocPgNums).correctTOCIndexPageNumbers();
-        }
-    </script>
+	<span class="guidanceTitle">Page numbers</span>
+	<p>
+		The page numbers in the brief section are automated. However, the page
+		numbers in the index must be manually updated.
+	</p>
+	<p>
+		By rule, index page numbers are numbered with Roman numerals (i, ii, iii).
+		Google Docs only allows page numbering in arabic numberals (1, 2, 3), so
+		you must manually type the index Roman numeral page numbers in the Google
+		Doc header. We made <a href="https://youtu.be/t8yNMHzrIFw" target="_blank">a
+			short video</a> showing how to do this.
+	</p>
+</div>
+<div class="guidanceSnippet editing_tools_sub_info1">
+	<span class="guidanceTitle">Table of contents</span>
+	<p>
+		In this template, we include a Google Docs built-in Table of Contents,
+		which you can view on page "v" of the index. However, the index page
+		numbers will not auto-update.
+	</p>
+	<p>
+		We've provided a button for updating the index page numbers. See below.
+		Before running, make sure that the Table of Contents is updated. (Update
+		by right-clicking anywhere in the TOC, then clicking "Update Table
+		of Contents".)
+	</p>
+	<p>
+		<input id="updateTOC_pgnums"
+           type="button"
+           value="Update TOC page numbers"
+           onclick="correctTOCPgNums()" />
+  </p>
+		<div id="updateTocPgNumsNote" class="progress-popup">
+			Page numbers updated
+		</div>
+		<script>
+			function updateTocPgNums(value) {
+        document.getElementById("updateTOC_pgnums").disabled = false;
+        $('#updateTocPgNumsNote').text(value);
+        $('#updateTocPgNumsNote').show(500).delay(2500).hide(500);
+      }
+
+      function correctTOCPgNums() {
+        document.getElementById("updateTOC_pgnums").disabled = true;
+        google.script.run.withSuccessHandler(updateTocPgNums).correctTOCIndexPageNumbers();
+      }
+		</script>
 </div>
 <div class="guidanceSnippet editing_tools_sub_info2">
-    <span class="guidanceTitle">
-        Set page size
-    </span>
-    <p>
-        Use the buttons below to change the layout of the entire document. 
-        <b>Booklet</b> changes the layout to <b>6&nbsp;⅛ x 9&nbsp;¼ inch</b> 
-        pages, which adheres to traditional Supreme Court rules. 
-        <b>Letter</b> changes the layout to <b>8&nbsp;½ x 11 inch</b> pages.
-    </p>
-    <p>
-        <input class="small-btn" type="button" value="Letter" onclick="setPageToLetterSize()" />
-        <input class="small-btn" type="button" value="Booklet" onclick="setPageToBookletSize()" />
-    </p>
-    <div id="pageSizeNote" class="progress-popup">
-        Page size changed
-    </div>
-    <script>
-        function updatePageSizeNote(value) {
-            $('#pageSizeNote').text(value);
-            $('#pageSizeNote').show(500).delay(2500).hide(500);
-        }
+	<span class="guidanceTitle">
+    Set page size
+  </span>
+	<p>
+		Use the buttons below to change the layout of the entire document.
+		<b>Booklet</b> changes the layout to <b>6&nbsp;⅛ x 9&nbsp;¼ inch</b>
+		pages, which adheres to traditional Supreme Court rules.
+		<b>Letter</b> changes the layout to <b>8&nbsp;½ x 11 inch</b> pages.
+	</p>
+	<p>
+		<input id="setPageSizeToLetterBtn"
+           class="small-btn"
+           type="button"
+           value="Letter"
+           onclick="setPageToLetterSize()" />
+		<input id="setPageSizeToBookletBtn"
+           class="small-btn"
+           type="button"
+           value="Booklet"
+           onclick="setPageToBookletSize()" />
+  </p>
+		<div id="pageSizeNote" class="progress-popup">
+			Page size changed
+		</div>
+		<script>
+			function updatePageSizeNote(value) {
+        document.getElementById("setPageSizeToBookletBtn").disabled = false;
+        document.getElementById("setPageSizeToLetterBtn").disabled = false;
+        $('#pageSizeNote').text(value);
+        $('#pageSizeNote').show(500).delay(2500).hide(500);
+      }
 
-        function setPageToLetterSize() {
-            google.script.run.withSuccessHandler(updatePageSizeNote).setPageSizeToLetter();
-        }
+    function setPageToLetterSize() {
+      document.getElementById("setPageSizeToLetterBtn").disabled = true;
+      google.script.run.withSuccessHandler(updatePageSizeNote).setPageSizeToLetter();
+    }
 
-        function setPageToBookletSize() {
-            google.script.run.withSuccessHandler(updatePageSizeNote).setPageSizeToBooklet();
-        }
-    </script>
+    function setPageToBookletSize() {
+      document.getElementById("setPageSizeToBookletBtn").disabled = true;
+      google.script.run.withSuccessHandler(updatePageSizeNote).setPageSizeToBooklet();
+    }
+		</script>
 </div>
 <div class="guidanceSnippet editing_tools_sub_info2 heading_extra_space">
-    <span class="guidanceTitle">
-        Expand / shrink height of cover
-    </span>
-    <p>
-        Use the following buttons to adjust the vertical alignment of the cover. The butons 
-        add or remove spacing before and after each cover element. Note that the cover must fit on 
-        a single page.
-    </p>    
-    <p>
-        <input class="small-btn" type="button" value="Expand height" onclick="increaseSpacing()" />
-        <input class="small-btn" type="button" value="Shrink height" onclick="decreaseSpacing()" />
-    </p>
-    <div id="coverExpandNote" style="display:none;">
-        Spacing changed
-    </div>
-    <script>
-        function updateCoverExpandNote(value) {
-            //$('#coverExpandNote').text(value);
-            $('#coverExpandNote').text(value).show(500).delay(2500).hide(500);
-            //console.log("VALUE:" + value);
-        }
+	<span class="guidanceTitle">
+    Expand / shrink height of cover
+  </span>
+	<p>
+		Use the following buttons to adjust the vertical alignment of the cover. The butons
+		add or remove spacing before and after each cover element. Note that the cover must fit on
+		a single page.
+	</p>
+	<p>
+		<input id="coverExpandBtn"
+           class="small-btn"
+           type="button"
+           value="Expand height"
+           onclick="increaseSpacing()" />
+		<input id="coverShrinkBtn"
+           class="small-btn"
+           type="button"
+           value="Shrink height"
+           onclick="decreaseSpacing()" />
+  </p>
+		<div id="coverExpandNote" style="display:none;">
+			Spacing changed
+		</div>
+		<script>
+			function updateCoverExpandNote(value) {
+        document.getElementById("coverExpandBtn").disabled=false;
+        document.getElementById("coverShrinkBtn").disabled=false;
+      //$('#coverExpandNote').text(value);
+      $('#coverExpandNote').text(value).show(500).delay(2500).hide(500);
+      //console.log("VALUE:" + value);
+    }
 
-        function increaseSpacing() {
-            google.script.run.withSuccessHandler(updateCoverExpandNote).increaseSpaceAroundAllParagraphs();
-        }
+    function increaseSpacing() {
+      document.getElementById("coverExpandBtn").disabled=true;
+      google.script.run.withSuccessHandler(updateCoverExpandNote).increaseSpaceAroundAllParagraphs();
+    }
 
-        function decreaseSpacing() {
-            google.script.run.withSuccessHandler(updateCoverExpandNote).decreaseSpaceAroundAllParagraphs();
-        }
-    </script>
+    function decreaseSpacing() {
+      document.getElementById("coverShrinkBtn").disabled=true;
+      google.script.run.withSuccessHandler(updateCoverExpandNote).decreaseSpaceAroundAllParagraphs();
+    }
+		</script>
 </div>
