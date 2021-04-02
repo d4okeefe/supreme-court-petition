@@ -1,5 +1,32 @@
 <style>
 
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+
   a.next {  text-decoration: none;
     display: inline-block;
     background-color: rgb(26, 115, 232);
@@ -39,7 +66,7 @@
 
   select {
     font-size: 13px;
-    padding: 5px;
+    padding: 0px 6px;
     width: 100%;
   }
 

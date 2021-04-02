@@ -4,28 +4,57 @@
     $(".guidanceSnippet").hide();
     $(".editing_tools_gen_info").show();
     $(".top-heading").text("The document");
+    document.getElementById('previous_button').disabled = true;
+
+    // PREVIOUS BUTTON
+    $('#previous_button').click(function() {
+      var s = document.getElementById("sections-all-in-one");
+      var curr_s = s.value;
+      //console.log(curr_s);
+      for (i = s.length - 1; i >= 0; i--){
+        var s_itm = s.options[i].value;
+        if(curr_s === s_itm){
+          if(i === 0){
+            document.getElementById('previous_button').disabled = true;  
+            break;
+          } else {               
+            document.getElementById('previous_button').disabled = false;
+            document.getElementById('next_button').disabled = false;  
+            s.selectedIndex = i - 1;
+            if(i - 1 === 0){
+              document.getElementById('previous_button').disabled = true;
+            }
+            s.dispatchEvent(new Event('change'));
+            break;
+          }
+        }
+      }
+    });
 
     // NEXT BUTTON
     $('#next_button').click(function() {
       var s = document.getElementById("sections-all-in-one");
       var curr_s = s.value;
-      console.log(curr_s);
+      //console.log(curr_s);
       for (i = 0; i < s.length; i++){
         var s_itm = s.options[i].value;
         if(curr_s === s_itm){
           if(i === s.length - 1){
-            s.selectedIndex = 0;
-            s.dispatchEvent(new Event('change'));   
+            document.getElementById('next_button').disabled = true;  
             break;       
-          }                  
-          s.selectedIndex = i + 1;
-          s.dispatchEvent(new Event('change'));
-          break;
+          }else{
+            document.getElementById('previous_button').disabled = false;
+            document.getElementById('next_button').disabled = false;            
+            s.selectedIndex = i + 1;
+            if(i + 1 === s.length - 1){
+              document.getElementById('next_button').disabled = true;
+            }
+            s.dispatchEvent(new Event('change'));
+            break;
+          }
         }
       }
     });
-
-
 
     // change sections-all-in-one
     $("#sections-all-in-one").change(function () {

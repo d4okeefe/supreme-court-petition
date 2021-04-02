@@ -136,11 +136,13 @@
 
     function setPageToLetterSize() {
       document.getElementById("setPageSizeToLetterBtn").disabled = true;
+document.getElementById("setPageSizeToBookletBtn").disabled = true;
       google.script.run.withSuccessHandler(updatePageSizeNote).setPageSizeToLetter();
     }
 
     function setPageToBookletSize() {
-      document.getElementById("setPageSizeToBookletBtn").disabled = true;
+      document.getElementById("setPageSizeToLetterBtn").disabled = true;
+document.getElementById("setPageSizeToBookletBtn").disabled = true;
       google.script.run.withSuccessHandler(updatePageSizeNote).setPageSizeToBooklet();
     }
 		</script>
@@ -180,11 +182,13 @@
 
     function increaseSpacing() {
       document.getElementById("coverExpandBtn").disabled=true;
+            document.getElementById("coverShrinkBtn").disabled=true;
       google.script.run.withSuccessHandler(updateCoverExpandNote).increaseSpaceAroundAllParagraphs();
     }
 
     function decreaseSpacing() {
-      document.getElementById("coverShrinkBtn").disabled=true;
+      document.getElementById("coverExpandBtn").disabled=true;
+            document.getElementById("coverShrinkBtn").disabled=true;
       google.script.run.withSuccessHandler(updateCoverExpandNote).decreaseSpaceAroundAllParagraphs();
     }
 		</script>
